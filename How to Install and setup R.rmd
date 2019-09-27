@@ -1,0 +1,118 @@
+---
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+# R and RStudio Install and Set-up Instructions
+
+While we have R and RStudio available on campus computers, installing them on your personal laptop or computer is a great idea. These are both open-source software and are thus free to download and install. 
+
+R and RStudio are separate downloads and installations. R is the underlying statistical computing environment, but it is easier to use if you also install RStudio. RStudio is a graphical integrated development environment (IDE) that adds some functionality to R. You need to install R before you install RStudio. After installing both programs, you will need to install the **tidyverse** and **swirl** packages from within RStudio. Follow the instructions below for your operating system, and then follow the instructions to install the **tidyverse** packages. If you've never used R before, or if you want some extra programming practice, you should also install the **swirl** package and work though the R Programming:  "basic building blocks" and "Sequences of numbers" lessons. There are instructions about this at the end of this handout.   
+
+## Windows
+### If you already have R and RStudio installed
+
+* Open RStudio, and click on “Help” > “Check for updates”. If a new version is available, quit RStudio, and download the latest version for RStudio.
+* To check which version of R you are using, start RStudio and the first thing that appears in the console indicates the version of R you are running. Alternatively, you can type on the console sessionInfo(), which will also display which version of R you are running. Then, see if a more recent version is available from the CRAN website at:
+
+https://cran.r-project.org/bin/windows/base/
+
+* If so, please download and install it. You can check here for more information on how to remove old versions from your system if you wish to do so:
+    https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f
+
+### If you don’t have R and RStudio installed
+
+* Download R from the CRAN website:    http://cran.r-project.org/bin/windows/base/release.htm
+* Run the .exe file that was just downloaded
+* Go to the RStudio download page: https://www.rstudio.com/products/rstudio/download/#download
+* Under Installers select RStudio x.yy.zzz - Windows Vista/7/8/10 (where x, y, and z represent version numbers)
+* Double click the file to install it
+* Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.
+
+## macOS
+### If you already have R and RStudio installed
+
+* Open RStudio, and click on “Help” > “Check for updates”. If a new version is available, quit RStudio, and download the latest version for RStudio.
+* To check the version of R you are using, start RStudio and the first thing that appears on the terminal indicates the version of R you are running. Alternatively, you can type sessionInfo(), which will also display which version of R you are running. Then, see if a more recent version is available from the CRAN website at:
+
+https://cran.r-project.org/bin/macosx/
+
+* If so, please download and install it.
+
+### If you don’t have R and RStudio installed
+
+* Download R from the CRAN website: http://cran.r-project.org/bin/macosx/
+* Select the .pkg file for the latest R version
+* Double click on the downloaded file to install R
+* It is also a good idea to install XQuartz (needed by some packages): https://www.xquartz.org/
+* Go to the RStudio download page: https://www.rstudio.com/products/rstudio/download/#download
+* Under Installers select RStudio x.yy.zzz - Mac OS X 10.6+ (64-bit) (where x, y, and z represent version numbers)
+* Double click the file to install RStudio
+* Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.
+
+## Linux
+
+* Follow the instructions for your distribution from CRAN:   
+
+https://cloud.r-project.org/bin/linux
+
+* They provide information to get the most recent version of R for common distributions. For most distributions, you can add the cran repository to get the latest R via your package manager (e.g., for Debian/Ubuntu run sudo apt-get install r-base, and for Fedora sudo yum install R). See this site for an example of how to add the repository and install R from the command line:
+
+ https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus/
+
+* Go to the RStudio download page: https://www.rstudio.com/products/rstudio/download/#download
+* Under Installers select the version that matches your distribution, and install it with your preferred method (e.g., with Debian/Ubuntu sudo dpkg -i rstudio-x.yy.zzz-amd64.deb at the terminal).
+* Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.
+
+## For everyone
+
+* After installing R and RStudio, you need to install the **tidyverse** packages.
+* After starting RStudio, at the console type:
+
+install.packages("tidyverse")
+
+* You can also do this by going to Tools -> Install Packages and typing the names of  packages, separated by a comma.
+
+## If you've never used R before
+
+Complete the R programming lesson in **swirl** before class next Monday
+
+* open Rstudio
+* Install the **swirl** package by typing at the R command line:
+
+install.packages("swirl")
+
+* You can also do this by going to Tools -> Install Packages and typing the names of packages you want to install, separated by a comma.
+
+* load the **swirl** library by typing at the R command line:
+
+library(swirl)
+
+* start a **swirl** lesson by typing at the R command line:
+
+swirl()
+
+* an interactive lesson will begin at the command line. When asked to pick a topic to learn, select option 1: R Programming: The basics of programming in R
+
+* work through the "basic building blocks" lesson and the "Sequences of numbers" lesson (as well as any others, if you have time and interest, but those two should get you started)
+
+
+## Resources for more learning
+
+* The install instructions in this handout were adapted from material available at the Data Carpentry website. I highly recommend the other R materials and lesson there as well, which are all self-guided, free, and open-source (e.g., free to use and adapt).
+
+https://datacarpentry.org/R-ecology-lesson/index.html
+
+* Another excellent resource for self-paced learning is the Software Carpentry website:
+
+https://software-carpentry.org/lessons/
+
+* I also highly recommend "R for Data Science" by Garrett Grolemund and Hadley Wickham, an open-source book available at 
+
+https://r4ds.had.co.nz/index.html
+
+* The R **swirl()** package also provides interactive training in programming at the R command line that is very useful, especially for beginners. 
+
+
+

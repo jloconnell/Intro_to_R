@@ -1,0 +1,332 @@
+R Programming: Functions, for loops, and tidyverse
+========================================================
+autosize: true
+transition: none
+css: custom.css
+
+Learning Objectives
+==============
+* functions: what to do?
+* control structures: 
+  - for loop: how many times to repeat?
+* tidyverse: a collection of packages to ease data science tasks
+    
+Learning Objectives
+==============
+* **functions**: what to do?
+* control structures: 
+  - for loop: how many times to repeat?
+* tidyverse: a collection of packages to ease data science tasks
+  
+Functions: what to do
+==============
+* Every data step is accomplished with functions
+* You can use built-in functions or define your own
+* Functions are a set of steps that are named and saved to use later
+
+Functions: what to do
+==============
+* How to define a function, psuedo-code:
+
+myfunction <- function(arg1, arg2 = default2) **{**
+
+    take arguments as inputs
+    do some data steps involving the arguments
+    return(an object)
+  
+**}**
+
+Functions: what to do
+==============
+* an example function
+
+```{r}
+half.it<- function(x) {
+  y<-x/2
+  return(y)
+}
+
+myvector<-1:10
+myvector
+new.vect<-half.it(myvector)
+new.vect
+```
+
+Functions: Explore some known functions
+==============
+* type ?**function** at the command line to get its help page
+* ex: ?seq.Date
+* type **function** at the command line to print the function code
+
+
+
+Functions: Explore some known functions
+==============
+* ex: seq.Date()
+```{r}
+?seq.Date
+```
+
+![](seqDate_help.jpg)
+
+Functions: Explore some known functions
+==============
+* ex: seq.Date(), see the source code
+```{r}
+seq.Date
+```
+
+Functions: Arguments
+==============
+* if you call the arguments in the default order, there's no need to specify the argument name
+* if you call them out of order, you need to specify the argument name
+* you can use the beginning of the argument name
+
+Functions: Arguments
+==============
+* valid ways to write function arguments
+```{r}
+##specify all argument names
+seq.Date(from=as.Date("2019-01-01"),to=as.Date("2019-01-10"), by=2)
+##leave argument names out, but put argments in the right order
+seq.Date(as.Date("2019-01-01"),as.Date("2019-01-10"), 2)
+##specify argments in a differnt order, use just the beginining of the arg. name
+seq.Date(t=as.Date("2019-01-10"),f=as.Date("2019-01-01"), b=2)
+```
+
+Functions: Arguments
+==============
+* arguments without defaults are required
+* note that the error messages are useful
+* try searching the internet with the extact text of an error message
+
+```{r, error=T}
+seq.Date(from=as.Date("2019-01-01"),to=as.Date("2019-01-10"))
+```
+
+  Functions: Arguments
+  ==============
+  * arguments with defaults will be set for you if you don't change them
+  ```{r, }
+  ?data.frame
+  ```
+  
+  ![](dataframe_help.png)
+  
+  Functions: Arguments
+  ==============
+  * arguments with defaults will be set for you if you don't change them
+  * data.frame will default to setting characters as factors
+  ```{r}
+  dat<-data.frame(id=c("a","b", "c"), x=1:3)
+  str(dat)
+  dat
+  unclass(dat$id)
+  ```
+  
+  Factors: A quick warning
+  ==============
+  * factors are useful in some situations, but are often interpreted by functions as the underying integers
+  
+  ```{r}
+  dat$id<-ifelse(dat$id=="a","z",dat$id)
+  dat
+  dat<-data.frame(id=letters[1:3], x=1:3)
+  dat$id<-ifelse(dat$id=="a","z",as.character(dat$id))
+  dat
+  ```
+  
+  Functions: Arguments
+  ==============
+  * arguments with defaults will be set for you if you don't change them
+  * can change the encoding of the data frame by setting the stringsAsFactors argument yourself
+  ```{r}
+  dat2<-data.frame(id=c("a","b", "c"), x=1:3, stringsAsFactors=F)
+  str(dat2)
+  dat2$id<-ifelse(dat2$id=="a","z",dat2$id)
+  dat2
+  ```
+  
+  Functions: Explore the function we made
+  ==============
+  * half.it
+  ```{r}
+  half.it
+  ```
+
+Functions: what to do
+==============
+* Can make your own functions as complicated as you like
+
+```{r}
+calc_index_l8<-function(dat.frame){
+  ##This function assumes it is supplied with a data frame
+  ##This function needs a data frame with Landsat 8 bands as columns
+  ##The data frame should have the column names b1 for band1, etc.
+  ##The function will return NDVI, a Simple Ratio, and SAVI
+  
+  ndvi<-(dat.frame$b5-dat.frame$b4)/(dat.frame$b5+dat.frame$b4) 
+  indices<-data.frame(ndvi=ndvi)
+  indices$sr<-(dat.frame$b5/dat.frame$b4)
+  indices$savi <- 1.5*(dat.frame$b5-dat.frame$b4) /
+                  (dat.frame$b5+dat.frame$b4+0.5)
+  return(indices)
+}
+```
+
+Functions: R practice on your own
+==============
+* With the last example as a code recipe, define a function that calculates vegetation indices from the super GER
+  - Use the bands for the veg indices you identified in lab 1
+* How can you add these indices as columns in your data? (see the combining data slides or cheatsheet)
+* try this later as practice on your own
+
+
+
+Learning Objectives
+==============
+* functions: what to do?
+* control structures: 
+  - **for loop**: how many times to repeat?
+* tidyverse: a collection of packages to ease data science tasks
+  
+Control Stuctures: for
+==============
+* Tells the computer to repeat something 
+* psuedo-code:
+
+for( val in sequence ) **{**
+
+    do some data steps on x[val]
+    
+**}**
+
+* above, val will take on the sequence values, iteratively each time through the loop
+
+Control Stuctures: for
+==============
+```{r}
+x<-letters[1:3]
+x
+for(i in 1:length(x)){
+  print(paste("this one was", x[i]))
+}
+```
+
+Control Stuctures: for
+==============
+* can use for loops to collect a result
+```{r}
+## a loop to collect a new result
+x<-1:10
+
+##intialize a result vector
+result<-0
+for(i in 1:length(x)){
+  result[i]<- x[i]*x[i]
+  print(paste("i is", i, "and result[i] is", result[i]))
+}
+result
+```
+
+For loop: practice
+==============
+* see if you can plot the iris data with different colors by species via a for loop
+```{r, eval=F}
+colors<-c("red", "blue", "green")
+x<-unique(iris$Species)
+plot(iris$Sepal.Length[iris$Species=="setosa"], 
+     iris$Sepal.Width[iris$Species=="setosa"], 
+     xlab= "Sepal Length (mm)", ylab= "Sepal Width (mm)", 
+     pch=19, col=colors[1])
+
+```
+for( i in ??){
+
+    points(    some code here that plots points for other the species  )
+}
+
+* hint: replace ?? with a sequence, 
+* hint: for the points code, start with the code for adding points for one species 
+* you can also use the x vector we created in the first code chunk to index the species; to see this, try x[1]
+
+
+Learning Objectives
+==============
+* functions: what to do?
+* control structures: 
+    - for loop: how many times to repeat?
+* **tidyverse**: a collection of packages to ease data science tasks
+
+tidyverse: a new way to code data science tasks
+==============
+* developed mostly by Hadley Wickham, who also developed RStudio
+* a naturally interacting set of packages with "a common data philosophy"
+* many of the libraries load together with **library(tidyverse)**
+  - dplyr, ggplot, stringr, etc
+* they can also be loaded individually
+* well described in "R for Data Science" at https://r4ds.had.co.nz
+* see also the many cheatsheets available under help in RStudio, or online at: https://rstudio.com/resources/cheatsheets/
+
+tidyverse: a new way to code data science tasks
+==============
+* tidyverse functions recreate functionality that already exists in base R, but are sometimes more intuitive
+* tidyverse functions can be either faster or slower for your computer to run than base R
+* when to use tidyverse vs base R varies by taste and the data task
+* these exercises use base R for plotting, **stringr** for string manipulation, and both base R and **dplyr**/**plyr** as needed for data manipulation
+
+tidyverse: dplyr for data manipulation
+==============
+* see the data transformation/dplyr cheat sheet
+* has functions that are "verbs" for data manipulation:
+    - filter() ; arrange (), select(), mutate(), summarise(); group_by()
+* the first function argument is the data frame, the next is the column name w/o any **" "** or **$**
+```{r}
+library(dplyr)
+filter(iris, Species=="setosa")
+```
+
+
+
+tidyverse: dplyr for data manipulation
+==============
+* several function-verbs can be joined together with the pipe symbol  %>% 
+* Note the new data structure, tibble; this is the tidyverse version of a data frame
+
+```{r}
+names(iris)
+iris %>% filter(Sepal.Width<3.3) %>% group_by(Species) %>% summarise(Sep.Len=mean(Sepal.Length))
+
+```
+
+tidyverse: practice
+==============
+* see if you can add another column summarising other variables inside summarise()
+* To use the code below to get started, just remove the comment symbols **#**
+* can you summarise with other functions besides mean()? 
+  - Try sd(), sum(), +, /
+* what if you change the filter step?
+```{r, results=F, echo=T}
+iris %>% filter(Sepal.Width<3.3) %>% group_by(Species) %>% 
+  summarise(Sep.Len=mean(Sepal.Length) #,
+#           var.name= 
+             )
+
+```
+
+Lets try some exercises
+==============
+type: section
+
+there's a lot more to learn, but we have enough to get started
+
+Prefered topics for next lecture
+==============
+* Image manipulation: Get vegetation fraction from jpegs of plants
+* When Vegetation Indices aren't enough:
+  -  Partial Least Squares Regression (how to use all the bands in your regression model)
+  -  One Machine Learning Model (use all the bands in black box algorithm)
+     + Random Forests
+     + Extreme Gradient Boosting
+* Something else?
+* Email me if you have a favorite. We can likely only cover two topics.

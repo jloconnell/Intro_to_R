@@ -1,0 +1,31 @@
+---
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+  
+# R Assignment
+
+* Due before next class on Monday, Oct 7
+
+Open the Assignment folder and code recipe folder. There you'll find some R scripts with code recipes. Work through the code recipes 01 and 02. See if you can fill in the missing code, following the pseudocode as a guide. These scripts with open data files, work through some processing steps and write out new files to the output folder (inside the Assignment folder).
+
+Like ArcGIS, R can make use of relative file paths to know where to find data and write data. For this reason, we should not scatter files all around the computer, but instead we need to put them in the right places. These assignments make use of these relative folder paths and also use folders with specific purposes. 
+
+Assignment folder: the project folder for your assignment; All the files, the code, the data, and the code output should stay inside this folder
+
+* data folder: all the data you need to complete the assignment is 
+found here and should not be moved or changed
+
+* code recipe folder: all the r scripts go here; these scripts will document the data manipulation steps that take the data files as inputs and create the files in the output folder. These scripts provide a record of everything you've done. If you make a mistake or change your mind, you can change the R script and re-run it. It will then recreate the output data with your new parameters.
+
+* output folder: everything your R scripts write out to disk should go here; This allows you to keep your raw data pristine.
+
+The code recipes will guide you towards reading in the data in the data files and writing out changed data to the output folder. To get credit for the assignment, **when you're finished, zip your whole assignment folder and file share it with me (jessica.oconnell@uga.edu) using the file sharing service of your choice (dropbox, google drive, etc)**. Make a real effort at changing the pseudocode in the code recipe file into real R code. Learning R at first can be a mental struggle and you'll get real benefit from struggling over the code even if you can't complete the task. Ask for help from me or knowledgable classmates if you get stuck. You'll get full credit if you make a real effort, even if you don't completely transform the pseudocode in the code recipe.
+
+
+
+
+
+

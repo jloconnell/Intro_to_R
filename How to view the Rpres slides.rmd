@@ -1,0 +1,28 @@
+---
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+
+# How to see the slide presentation
+
+The slides for the R lecture where made inside R with Rmarkdown. This integrates the R code, code results and text together in the slides. Here's how to use these slides:
+
+1. Open the .Rpres file with RStudio
+
+2. Click the preview button at the top of the text editor window in RStudio
+
+3. Note that a presentation appears in the upper left box in RStudio
+
+4. Click the + button to pop the presentation out into it's own window and view at a large size
+
+5. You can also view the presentation full screen with your web browser. To do this, click the More drop-down button, and click View in browser
+
+6. To navigate the presentation, click the buttons or the left and right arrows on your key board
+
+7. To rapidly change slides, press o
+
+8. To view full screen, press f
+
+9. The presentation will look best if the custom.css file is in the same folder with the .Rpres file
