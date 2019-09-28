@@ -5,6 +5,12 @@ output:
   html_document: default
 ---
 
+# Download the lecture and assignments
+
+All the data for the lecture is available online at https://github.com/jloconnell/Intro_to_R
+
+At that URL, click the green clone or download button and download the zip file. Extract the zip file to a location of your choice. The assignement data and slide will be inside the zip folder
+
 # How to see the slide presentation
 
 The slides for the R lecture where made inside R with Rmarkdown. This integrates the R code, code results and text together in the slides. Here's how to use these slides:
