@@ -58,7 +58,7 @@ Programming has a learning curve
 
 More resources
 ===============
-* Cran: https://cran.r-project.org/doc/manuals/r-release/R-intro.html
+* Cran: https://cran.r-project.org/manuals.html
 * Swirl: R package that teaches R basics through easy interactive learning
 * Software Carpentry: https://swcarpentry.github.io/r-novice-inflammation/
 * Data Carpentry: https://datacarpentry.org/R-ecology-lesson/index.html
@@ -87,7 +87,14 @@ How to use R: some basics
 ```{r}
 2+2
 2*4
+2^3
 ```
+
+* Practice: can you use the symbols below?
+       
+       /  *  +   - 
+       
+       sqrt(4) , sum( 2, 4 ) , mean( 2,4 )
 
 How to use R: some basics
 ======================
@@ -97,6 +104,8 @@ How to use R: some basics
 x <- 2
 x
 y<- x+x
+y
+y<- sum(x,x,x)
 y
 ```
 
@@ -111,11 +120,12 @@ x
 
 R data types: the type of variable
 ======================
-* character
+* character (text)
 * numeric (real or decimal)
-* integer
-* logical
+* integer (whole numbers)
+* logical (TRUE/FALSE)
 * dates/times
+* factors (special type of ordered character data)
 * some others
 
 R data structures: the type of object
@@ -123,6 +133,7 @@ R data structures: the type of object
 - Vectors
 - Matrices
 - Data frames
+- Some others
 
 
 Vectors
@@ -147,6 +158,8 @@ class(y)
 length(y)
 ```
 
+* Practice: use the examples to create a vector of numeric or logical data
+
 Matrices
 ======================
 * Matrix: an atomic vector with dimensions: the number of rows and columns
@@ -154,9 +167,15 @@ Matrices
 
 ```{r}
 m <- matrix(nrow = 2, ncol = 2)
+
+##note: NA is the data type for missing data
 m
+class(m)
+##what are the dimensions (rows, colunns)?
 dim(m)
 ```
+
+* Why did the code above create a matrix of missing data?
 
 Matrices
 ======================
@@ -169,6 +188,9 @@ m
 dim(m)
 ```
 
+* Practice: use the examples to create a matrix filled with character data
+
+
 Data frame
 ======================
 * Data frame: the most common data type for tabular data
@@ -178,7 +200,12 @@ Data frame
 
 ```{r}
 dat <- data.frame(id = letters[1:10], x = 1:10, y = 11:20)
+
+##see the top few rows
 head(dat)
+## see some summary info
+class(dat)
+dim(dat)
 ```
 
 Data frame
@@ -191,6 +218,10 @@ class(iris)
 dim(iris)
 names(iris)
 ```
+
+* Practice: use **head(** iris **)** to see which species is in the first few rows
+* What do you guess the function to see the last few rows is?
+
 
 Data frame
 ======================
@@ -205,10 +236,14 @@ tail(iris)
 Data frame
 ======================
 * see the structure of all the data with **str( )**
-* cross tabulate one column with table
 
 ```{r}
 str(iris)
+```
+
+* cross tabulate one column with table
+
+```{r}
 table(iris$Species)
 ```
 
@@ -219,6 +254,14 @@ Data frame
 ```{r}
 summary(iris)
 ```
+
+Data frame
+======================
+* In R studio, you should have already typed the code: **data(iris)**
+* Look at the Environment tab in the top right box, did iris appear there?
+* Click on iris to see what happens
+* Notice everything else in the environment tab. These are the objects in memory now.
+
 
 Subsetting vectors
 ============
@@ -248,11 +291,14 @@ Subsetting vectors
     + a conditional index will grab values that meet a criteria
 
 ```{r}
-x<-1:10
+x<-seq(1,20, by=2)
 x
 x[x<=7]
 x[x==7]
 ```
+
+* Practice: can you grab the 5th item in the vector? 
+*     Try saving values of **x** greater than 10 as **y**
 
 Subsetting vectors
 =============
@@ -305,6 +351,9 @@ dat[1:5,2]
 dat[ ,2]
 ```
 
+* Practice: Try grabing the 2nd row and saving it as **z**
+* what kind of data is z? (try **class(** z **)** to see)
+
 Subsetting data frames and matrices
 ============
 * You can also grab rows based on a condition
@@ -317,12 +366,15 @@ dat[ dat$x>7, 2]
 
 Subsetting data frames and matrices
 ============
-* What if I want all the rows in column 1 ("id") where x is greater than 8?
+* What if I want all the rows in column 1 ("id") where a different column, x, is greater than 8?
 
 ```{r}
 ##rows where x >8, column 1
 dat[dat$x>8, 1]
+dat$x>8
 ```
+
+* Note: if you give R an index of TRUE and FALSE, it assumes you want to keep TRUE
 
 Subsetting data frames and matrices
 ============
@@ -369,6 +421,8 @@ m<-rbind(m,y)
 m
 ```
 
+* practice: create a vector and then use **cbind(** **)** to add it to your matrix. Look at the result.
+
 Combining data: data frames
 ======================
 * add a new named column
@@ -385,15 +439,13 @@ Combining data: data frames
 ======================
 * how do I create a new column as a mathmatic combo of other columns?
 
-Combining data: data frames
-======================
-* how do I create a new column as a mathmatic combo of other columns?
-
 ```{r}
 dat$sr<-(dat$band2)/(dat$band3)
 head(dat)
 ```
 
+* practice: create a new column in **dat** that is the normalized difference of two band columns 
+pseudo code: (x-y)/(x+y)
 
 
 Combining data: data frames
@@ -416,9 +468,11 @@ Combining data: data frames
 * merge two data frames via a common column
 
 ```{r}
-dat<-merge(dat, dat2, by="date", all.x=T, all.y=T)
+dat<-merge(dat, dat2, by="date", all.x=TRUE, all.y=TRUE)
 head(dat)
 ```
+
+* Practice: what happens if I change all.x or all.y to FALSE?
 
 Plotting data
 ===============

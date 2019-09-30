@@ -38,6 +38,26 @@ myfunction <- function(arg1, arg2 = default2) **{**
 
 Functions: what to do
 ==============
+* How to define a function, psuedo-code:
+
+myfunction <- function(arg1, arg2 = default2) **{**
+
+    take arguments as inputs
+    do some data steps involving the arguments
+    return(an object)
+  
+**}**
+
+* How to apply a function, psuedo-code:
+
+        x <- myfunction(arg1, arg2 = default2)
+
+* This will apply the data steps to arg1 and 2 and save the outcome as x
+
+
+
+Functions: what to do
+==============
 * an example function
 
 
@@ -81,6 +101,191 @@ Functions: Explore some known functions
 ```
 
 ![](seqDate_help.jpg)
+
+
+Functions: Explore some known functions
+==============
+* Take a moment to explore the help of some other functions, check the bottom of the help for examples
+
+Functions: Arguments
+==============
+* if you call the arguments in the default order, there's no need to specify the argument name
+* if you call them out of order, you need to specify the argument name
+* you can use the beginning of the argument name
+
+Functions: Arguments
+==============
+* valid ways to write function arguments
+
+```r
+##specify all argument names
+seq.Date(from=as.Date("2019-01-01"),to=as.Date("2019-01-10"), by=2)
+```
+
+```
+[1] "2019-01-01" "2019-01-03" "2019-01-05" "2019-01-07" "2019-01-09"
+```
+
+```r
+##leave argument names out, but put argments in the right order
+seq.Date(as.Date("2019-01-01"),as.Date("2019-01-10"), 2)
+```
+
+```
+[1] "2019-01-01" "2019-01-03" "2019-01-05" "2019-01-07" "2019-01-09"
+```
+
+```r
+##specify argments in a differnt order, use just the beginining of the arg. name
+seq.Date(t=as.Date("2019-01-10"),f=as.Date("2019-01-01"), b=2)
+```
+
+```
+[1] "2019-01-01" "2019-01-03" "2019-01-05" "2019-01-07" "2019-01-09"
+```
+
+Functions: Arguments
+==============
+* arguments without defaults are required
+
+
+```r
+seq.Date(from=as.Date("2019-01-01"),to=as.Date("2019-01-10"))
+```
+
+```
+Error in seq.Date(from = as.Date("2019-01-01"), to = as.Date("2019-01-10")): exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified
+```
+
+* note that the error messages are useful
+* try searching the internet with the extact text of an error message
+
+
+Functions: Arguments
+=============
+* arguments with defaults will be set for you if you don't change them
+
+
+```r
+?data.frame
+```
+  
+![](dataframe_help.png)
+  
+Functions: Arguments
+==============
+* arguments with defaults will be set for you if you don't change them
+* data.frame will default to setting characters as factors
+
+
+```r
+dat<-data.frame(id=c("a","b", "c"), x=1:3)
+str(dat)
+```
+
+```
+'data.frame':	3 obs. of  2 variables:
+ $ id: Factor w/ 3 levels "a","b","c": 1 2 3
+ $ x : int  1 2 3
+```
+
+```r
+dat
+```
+
+```
+  id x
+1  a 1
+2  b 2
+3  c 3
+```
+
+```r
+unclass(dat$id)
+```
+
+```
+[1] 1 2 3
+attr(,"levels")
+[1] "a" "b" "c"
+```
+  
+Factors: A quick warning
+==============
+* factors are useful in some situations, but are often interpreted by functions as the underying integers
+  
+
+```r
+  dat$id<-ifelse(dat$id=="a","z",dat$id)
+  dat
+```
+
+```
+  id x
+1  z 1
+2  2 2
+3  3 3
+```
+
+```r
+  dat<-data.frame(id=letters[1:3], x=1:3)
+  dat$id<-ifelse(dat$id=="a","z",as.character(dat$id))
+  dat
+```
+
+```
+  id x
+1  z 1
+2  b 2
+3  c 3
+```
+  
+Functions: Arguments
+==============
+* arguments with defaults will be set for you if you don't change them
+* you can change the encoding of the data frame by setting the stringsAsFactors argument yourself
+
+
+```r
+dat2<-data.frame(id=c("a","b", "c"), x=1:3, stringsAsFactors=F)
+str(dat2)
+```
+
+```
+'data.frame':	3 obs. of  2 variables:
+ $ id: chr  "a" "b" "c"
+ $ x : int  1 2 3
+```
+
+```r
+dat2$id<-ifelse(dat2$id=="a","z",dat2$id)
+dat2
+```
+
+```
+  id x
+1  z 1
+2  b 2
+3  c 3
+```
+
+* strinsAsFactors is long to type. Do I need to type out the whole thing? See if you can find the right short hand.
+
+Functions: See the source code
+==============
+* half.it
+
+
+```r
+half.it
+```
+
+```
+function(x) {
+  y<-x/2
+  return(y)
+}
+```
 
 Functions: Explore some known functions
 ==============
@@ -197,181 +402,9 @@ function (from, to, by, length.out = NULL, along.with = NULL,
     }
     res
 }
-<bytecode: 0x39ce748>
+<bytecode: 0x44d40e8>
 <environment: namespace:base>
 ```
-
-Functions: Arguments
-==============
-* if you call the arguments in the default order, there's no need to specify the argument name
-* if you call them out of order, you need to specify the argument name
-* you can use the beginning of the argument name
-
-Functions: Arguments
-==============
-* valid ways to write function arguments
-
-```r
-##specify all argument names
-seq.Date(from=as.Date("2019-01-01"),to=as.Date("2019-01-10"), by=2)
-```
-
-```
-[1] "2019-01-01" "2019-01-03" "2019-01-05" "2019-01-07" "2019-01-09"
-```
-
-```r
-##leave argument names out, but put argments in the right order
-seq.Date(as.Date("2019-01-01"),as.Date("2019-01-10"), 2)
-```
-
-```
-[1] "2019-01-01" "2019-01-03" "2019-01-05" "2019-01-07" "2019-01-09"
-```
-
-```r
-##specify argments in a differnt order, use just the beginining of the arg. name
-seq.Date(t=as.Date("2019-01-10"),f=as.Date("2019-01-01"), b=2)
-```
-
-```
-[1] "2019-01-01" "2019-01-03" "2019-01-05" "2019-01-07" "2019-01-09"
-```
-
-Functions: Arguments
-==============
-* arguments without defaults are required
-* note that the error messages are useful
-* try searching the internet with the extact text of an error message
-
-
-```r
-seq.Date(from=as.Date("2019-01-01"),to=as.Date("2019-01-10"))
-```
-
-```
-Error in seq.Date(from = as.Date("2019-01-01"), to = as.Date("2019-01-10")): exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified
-```
-
-  Functions: Arguments
-  ==============
-  * arguments with defaults will be set for you if you don't change them
-  
-  ```r
-  ?data.frame
-  ```
-  
-  ![](dataframe_help.png)
-  
-  Functions: Arguments
-  ==============
-  * arguments with defaults will be set for you if you don't change them
-  * data.frame will default to setting characters as factors
-  
-  ```r
-  dat<-data.frame(id=c("a","b", "c"), x=1:3)
-  str(dat)
-  ```
-  
-  ```
-  'data.frame':	3 obs. of  2 variables:
-   $ id: Factor w/ 3 levels "a","b","c": 1 2 3
-   $ x : int  1 2 3
-  ```
-  
-  ```r
-  dat
-  ```
-  
-  ```
-    id x
-  1  a 1
-  2  b 2
-  3  c 3
-  ```
-  
-  ```r
-  unclass(dat$id)
-  ```
-  
-  ```
-  [1] 1 2 3
-  attr(,"levels")
-  [1] "a" "b" "c"
-  ```
-  
-  Factors: A quick warning
-  ==============
-  * factors are useful in some situations, but are often interpreted by functions as the underying integers
-  
-  
-  ```r
-  dat$id<-ifelse(dat$id=="a","z",dat$id)
-  dat
-  ```
-  
-  ```
-    id x
-  1  z 1
-  2  2 2
-  3  3 3
-  ```
-  
-  ```r
-  dat<-data.frame(id=letters[1:3], x=1:3)
-  dat$id<-ifelse(dat$id=="a","z",as.character(dat$id))
-  dat
-  ```
-  
-  ```
-    id x
-  1  z 1
-  2  b 2
-  3  c 3
-  ```
-  
-  Functions: Arguments
-  ==============
-  * arguments with defaults will be set for you if you don't change them
-  * can change the encoding of the data frame by setting the stringsAsFactors argument yourself
-  
-  ```r
-  dat2<-data.frame(id=c("a","b", "c"), x=1:3, stringsAsFactors=F)
-  str(dat2)
-  ```
-  
-  ```
-  'data.frame':	3 obs. of  2 variables:
-   $ id: chr  "a" "b" "c"
-   $ x : int  1 2 3
-  ```
-  
-  ```r
-  dat2$id<-ifelse(dat2$id=="a","z",dat2$id)
-  dat2
-  ```
-  
-  ```
-    id x
-  1  z 1
-  2  b 2
-  3  c 3
-  ```
-  
-  Functions: Explore the function we made
-  ==============
-  * half.it
-  
-  ```r
-  half.it
-  ```
-  
-  ```
-  function(x) {
-    y<-x/2
-    return(y)
-  }
-  ```
 
 Functions: what to do
 ==============
@@ -446,6 +479,21 @@ for(i in 1:length(x)){
 [1] "this one was b"
 [1] "this one was c"
 ```
+
+Control Stuctures: for
+==============
+* Practice: create your own for loop
+ come up with a loop that will just print the value of i 10 times
+
+* psuedo-code:
+
+for( ) **{**
+
+     print(           )
+    
+**}**
+
+
 
 Control Stuctures: for
 ==============
@@ -530,6 +578,21 @@ tidyverse: a new way to code data science tasks
 * when to use tidyverse vs base R varies by taste and the data task
 * these exercises use base R for plotting, **stringr** for string manipulation, and both base R and **dplyr**/**plyr** as needed for data manipulation
 
+
+```r
+library(tidyverse)
+head(arrange(iris, Sepal.Length))
+```
+
+```
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          4.3         3.0          1.1         0.1  setosa
+2          4.4         2.9          1.4         0.2  setosa
+3          4.4         3.0          1.3         0.2  setosa
+4          4.4         3.2          1.3         0.2  setosa
+5          4.5         2.3          1.3         0.3  setosa
+6          4.6         3.1          1.5         0.2  setosa
+```
 tidyverse: dplyr for data manipulation
 ==============
 * see the data transformation/dplyr cheat sheet

@@ -58,7 +58,7 @@ Programming has a learning curve
 
 More resources
 ===============
-* Cran: https://cran.r-project.org/doc/manuals/r-release/R-intro.html
+* Cran: https://cran.r-project.org/manuals.html
 * Swirl: R package that teaches R basics through easy interactive learning
 * Software Carpentry: https://swcarpentry.github.io/r-novice-inflammation/
 * Data Carpentry: https://datacarpentry.org/R-ecology-lesson/index.html
@@ -101,6 +101,20 @@ How to use R: some basics
 [1] 8
 ```
 
+```r
+2^3
+```
+
+```
+[1] 8
+```
+
+* Practice: can you use the symbols below?
+       
+       /  *  +   - 
+       
+       sqrt(4) , sum( 2, 4 ) , mean( 2,4 )
+
 How to use R: some basics
 ======================
 * R is object-oriented
@@ -124,6 +138,15 @@ y
 [1] 4
 ```
 
+```r
+y<- sum(x,x,x)
+y
+```
+
+```
+[1] 6
+```
+
 How to use R: some basics
 ======================
 * R can also handle text and character data
@@ -140,11 +163,12 @@ x
 
 R data types: the type of variable
 ======================
-* character
+* character (text)
 * numeric (real or decimal)
-* integer
-* logical
+* integer (whole numbers)
+* logical (TRUE/FALSE)
 * dates/times
+* factors (special type of ordered character data)
 * some others
 
 R data structures: the type of object
@@ -152,6 +176,7 @@ R data structures: the type of object
 - Vectors
 - Matrices
 - Data frames
+- Some others
 
 
 Vectors
@@ -214,6 +239,8 @@ length(y)
 [1] 3
 ```
 
+* Practice: use the examples to create a vector of numeric or logical data
+
 Matrices
 ======================
 * Matrix: an atomic vector with dimensions: the number of rows and columns
@@ -222,6 +249,8 @@ Matrices
 
 ```r
 m <- matrix(nrow = 2, ncol = 2)
+
+##note: NA is the data type for missing data
 m
 ```
 
@@ -232,12 +261,23 @@ m
 ```
 
 ```r
+class(m)
+```
+
+```
+[1] "matrix"
+```
+
+```r
+##what are the dimensions (rows, colunns)?
 dim(m)
 ```
 
 ```
 [1] 2 2
 ```
+
+* Why did the code above create a matrix of missing data?
 
 Matrices
 ======================
@@ -264,6 +304,9 @@ dim(m)
 [1] 2 3
 ```
 
+* Practice: use the examples to create a matrix filled with character data
+
+
 Data frame
 ======================
 * Data frame: the most common data type for tabular data
@@ -274,6 +317,8 @@ Data frame
 
 ```r
 dat <- data.frame(id = letters[1:10], x = 1:10, y = 11:20)
+
+##see the top few rows
 head(dat)
 ```
 
@@ -285,6 +330,23 @@ head(dat)
 4  d 4 14
 5  e 5 15
 6  f 6 16
+```
+
+```r
+## see some summary info
+class(dat)
+```
+
+```
+[1] "data.frame"
+```
+
+```r
+dim(dat)
+```
+
+```
+[1] 10  3
 ```
 
 Data frame
@@ -317,6 +379,10 @@ names(iris)
 [1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" 
 [5] "Species"     
 ```
+
+* Practice: use **head(** iris **)** to see which species is in the first few rows
+* What do you guess the function to see the last few rows is?
+
 
 Data frame
 ======================
@@ -355,7 +421,6 @@ tail(iris)
 Data frame
 ======================
 * see the structure of all the data with **str( )**
-* cross tabulate one column with table
 
 
 ```r
@@ -370,6 +435,9 @@ str(iris)
  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
 ```
+
+* cross tabulate one column with table
+
 
 ```r
 table(iris$Species)
@@ -406,6 +474,14 @@ summary(iris)
                 
                 
 ```
+
+Data frame
+======================
+* In R studio, you should have already typed the code: **data(iris)**
+* Look at the Environment tab in the top right box, did iris appear there?
+* Click on iris to see what happens
+* Notice everything else in the environment tab. These are the objects in memory now.
+
 
 Subsetting vectors
 ============
@@ -460,12 +536,12 @@ Subsetting vectors
 
 
 ```r
-x<-1:10
+x<-seq(1,20, by=2)
 x
 ```
 
 ```
- [1]  1  2  3  4  5  6  7  8  9 10
+ [1]  1  3  5  7  9 11 13 15 17 19
 ```
 
 ```r
@@ -473,7 +549,7 @@ x[x<=7]
 ```
 
 ```
-[1] 1 2 3 4 5 6 7
+[1] 1 3 5 7
 ```
 
 ```r
@@ -483,6 +559,9 @@ x[x==7]
 ```
 [1] 7
 ```
+
+* Practice: can you grab the 5th item in the vector? 
+*     Try saving values of **x** greater than 10 as **y**
 
 Subsetting vectors
 =============
@@ -498,7 +577,7 @@ x[x<7]
 ```
 
 ```
-[1] 1 2 3 4 5 6
+[1] 1 3 5
 ```
 
 Subsetting vectors
@@ -523,7 +602,7 @@ x[length(x)]
 ```
 
 ```
-[1] 10
+[1] 19
 ```
 
 Subsetting data frames and matrices
@@ -579,6 +658,9 @@ dat[ ,2]
  [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
+* Practice: Try grabing the 2nd row and saving it as **z**
+* what kind of data is z? (try **class(** z **)** to see)
+
 Subsetting data frames and matrices
 ============
 * You can also grab rows based on a condition
@@ -595,7 +677,7 @@ dat[ dat$x>7, 2]
 
 Subsetting data frames and matrices
 ============
-* What if I want all the rows in column 1 ("id") where x is greater than 8?
+* What if I want all the rows in column 1 ("id") where a different column, x, is greater than 8?
 
 
 ```r
@@ -607,6 +689,16 @@ dat[dat$x>8, 1]
 [1] i j
 Levels: a b c d e f g h i j
 ```
+
+```r
+dat$x>8
+```
+
+```
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
+```
+
+* Note: if you give R an index of TRUE and FALSE, it assumes you want to keep TRUE
 
 Subsetting data frames and matrices
 ============
@@ -698,6 +790,8 @@ m
 y    2    2
 ```
 
+* practice: create a vector and then use **cbind(** **)** to add it to your matrix. Look at the result.
+
 Combining data: data frames
 ======================
 * add a new named column
@@ -709,10 +803,10 @@ head(dat)
 ```
 
 ```
-  plot     band1     band2
-1    a 0.1259024 0.1864763
-2    b 0.1243024 0.1007995
-3    c 0.1192236 0.2423295
+  plot      band1     band2
+1    a 0.09769060 0.2021737
+2    b 0.03810718 0.2707714
+3    c 0.14466211 0.1841557
 ```
 
 ```r
@@ -720,7 +814,7 @@ z<-rnorm(n=3, mean=0.15, sd=0.03); z
 ```
 
 ```
-[1] 0.1551864 0.1525386 0.1379421
+[1] 0.1415049 0.1775517 0.1240980
 ```
 
 ```r
@@ -729,15 +823,11 @@ head(dat)
 ```
 
 ```
-  plot     band1     band2     band3
-1    a 0.1259024 0.1864763 0.1551864
-2    b 0.1243024 0.1007995 0.1525386
-3    c 0.1192236 0.2423295 0.1379421
+  plot      band1     band2     band3
+1    a 0.09769060 0.2021737 0.1415049
+2    b 0.03810718 0.2707714 0.1775517
+3    c 0.14466211 0.1841557 0.1240980
 ```
-
-Combining data: data frames
-======================
-* how do I create a new column as a mathmatic combo of other columns?
 
 Combining data: data frames
 ======================
@@ -750,12 +840,14 @@ head(dat)
 ```
 
 ```
-  plot     band1     band2     band3        sr
-1    a 0.1259024 0.1864763 0.1551864 1.2016280
-2    b 0.1243024 0.1007995 0.1525386 0.6608131
-3    c 0.1192236 0.2423295 0.1379421 1.7567477
+  plot      band1     band2     band3       sr
+1    a 0.09769060 0.2021737 0.1415049 1.428739
+2    b 0.03810718 0.2707714 0.1775517 1.525028
+3    c 0.14466211 0.1841557 0.1240980 1.483954
 ```
 
+* practice: create a new column in **dat** that is the normalized difference of two band columns 
+pseudo code: (x-y)/(x+y)
 
 
 Combining data: data frames
@@ -801,7 +893,7 @@ Combining data: data frames
 
 
 ```r
-dat<-merge(dat, dat2, by="date", all.x=T, all.y=T)
+dat<-merge(dat, dat2, by="date", all.x=TRUE, all.y=TRUE)
 head(dat)
 ```
 
@@ -815,6 +907,8 @@ head(dat)
 6 2019-01-07  4 14    NA
 ```
 
+* Practice: what happens if I change all.x or all.y to FALSE?
+
 Plotting data
 ===============
 
@@ -825,7 +919,7 @@ plot(iris$Sepal.Length[iris$Species=="setosa"],
      xlab= "Sepal Length (mm)", ylab= "Sepal Width (mm)", col="red")
 ```
 
-![plot of chunk unnamed-chunk-30](00-intro_to_R-figure/unnamed-chunk-30-1.png)
+![plot of chunk unnamed-chunk-31](00-intro_to_R-figure/unnamed-chunk-31-1.png)
 
 
 Plotting data: add more points
@@ -839,13 +933,13 @@ points( iris$Sepal.Length[iris$Species=="versicolor"], pch=1,
         iris$Sepal.Width[iris$Species=="versicolor"], col="blue")
 ```
 
-![plot of chunk unnamed-chunk-31](00-intro_to_R-figure/unnamed-chunk-31-1.png)
+![plot of chunk unnamed-chunk-32](00-intro_to_R-figure/unnamed-chunk-32-1.png)
 
 Plotting data: adjust the plot
 ===============
 * how can we use **summary( )** to figure out what the axis limits should be?
 
-![plot of chunk unnamed-chunk-32](00-intro_to_R-figure/unnamed-chunk-32-1.png)
+![plot of chunk unnamed-chunk-33](00-intro_to_R-figure/unnamed-chunk-33-1.png)
 
 Plotting data: adjust the plot
 ===============
@@ -881,14 +975,14 @@ points( iris$Sepal.Length[iris$Species=="versicolor"], pch=1,
         iris$Sepal.Width[iris$Species=="versicolor"], col="blue")
 ```
 
-![plot of chunk unnamed-chunk-34](00-intro_to_R-figure/unnamed-chunk-34-1.png)
+![plot of chunk unnamed-chunk-35](00-intro_to_R-figure/unnamed-chunk-35-1.png)
 
 Plotting data: adjust the plot
 ===============
 * There's a third species. How can find out what it is and add it to the plot?
 * Hint: try summary(iris), table(iris$Species), or levels(iris$Species)
 
-![plot of chunk unnamed-chunk-35](00-intro_to_R-figure/unnamed-chunk-35-1.png)
+![plot of chunk unnamed-chunk-36](00-intro_to_R-figure/unnamed-chunk-36-1.png)
 
 Plotting data: add the third species
 ===============
@@ -905,5 +999,5 @@ points( iris$Sepal.Length[iris$Species=="virginica"], pch=3,
         iris$Sepal.Width[iris$Species=="virginica"], col="green")
 ```
 
-![plot of chunk unnamed-chunk-36](00-intro_to_R-figure/unnamed-chunk-36-1.png)
+![plot of chunk unnamed-chunk-37](00-intro_to_R-figure/unnamed-chunk-37-1.png)
   
