@@ -15,13 +15,17 @@ library(tidyverse); library(readxl)
 
 ##setup directories; change date to correct date (MMDDYYYY)
 date<-"07122016"
-
+  
 #super ger file root
 fileroot<-paste0("seagrant_", date)
+##first set your working directory, change this to the "raw_svc_data" folder path on your computer
+##if you're on Windows, remember that the file path must use "/" not "\"
+##note also, the path needs " " around the path string
 setwd("/home/jessica/UGA/Teaching/Intro_to_R/data/raw_svc_data")
 outdir<-("../output/")
-
-##load the field data; change sheet= to correct number
+  
+##load the field data
+##change the path below to the file path on your computer
 field<-read_excel("/home/jessica/UGA/Teaching/Intro_to_R/data/field_svc_data.xlsx")
 
 ##Process the SVC files
